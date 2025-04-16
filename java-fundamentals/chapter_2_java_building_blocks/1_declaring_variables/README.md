@@ -1,4 +1,4 @@
-# Classes Vs Files section
+# Declaring variables section
 
 This class contains tests to validate the rule for variable declaration and identifiers
 
