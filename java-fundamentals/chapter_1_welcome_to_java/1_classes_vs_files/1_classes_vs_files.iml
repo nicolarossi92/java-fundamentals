@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/1_only_one_public_class_any_non_public_class" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2_public_class_must_match_file_name" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/3_two_non_public_classes_compile" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/4_two_public_classes_will_not_compile" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
