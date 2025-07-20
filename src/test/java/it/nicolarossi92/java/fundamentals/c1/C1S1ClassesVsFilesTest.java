@@ -49,4 +49,21 @@ public class C1S1ClassesVsFilesTest {
         Assertions.assertEquals(0, outputCompilation);
     }
 
+    /**
+     * Test to ensure that a file containing a public class and any number of
+     * non-public classes will compile successfully. Java allows a public class to
+     * coexist with multiple non-public classes in the same file, as long as the
+     * public class's name matches the file name.
+     */
+    @Test
+    @DisplayName("A file containing a public class with any number of non public class will compile")
+    public void publicClassWithAnyNumberOfNonPublicClassesMustCompile(
+        @Compile(
+                mainClassPath = "c1/classes_vs_files",
+                classesToCompile = "OnlyOnePublicClassAnyNonPublicClass.java"
+        ) Integer outputCompilation
+    ){
+        Assertions.assertEquals(0, outputCompilation);
+    }
+
 }
