@@ -27,22 +27,20 @@ public class JavaProcessWrapper implements ProcessWrapper {
     /**
      * Gets a {@link JavaProcessWrapperBuilder} used to build up a {@link Process}
      * to encapsulate logic to execute a Java program
-     * @param compiledPath the path containing the compiled bytecodes, .class files
      * @return {@link JavaProcessWrapperBuilder} the builder
      */
-    public static JavaProcessWrapperBuilder builderJavaProcess(String compiledPath){
-        return new JavaProcessWrapperBuilder(compiledPath);
+    public static JavaProcessWrapperBuilder builderJavaProcess(){
+        return new JavaProcessWrapperBuilder();
     }
 
 
     /**
      * Gets a {@link JavacProcessWrapperBuilder} used to build up a {@link Process}
      * to encapsulate logic to execute Java compilation
-     * @param sourcePath the path containing the source codes, .java files to compile
      * @return {@link JavacProcessWrapperBuilder} the builder
      */
-    public static JavacProcessWrapperBuilder builderJavacProcess(String sourcePath){
-        return new JavacProcessWrapperBuilder(sourcePath);
+    public static JavacProcessWrapperBuilder builderJavacProcess(){
+        return new JavacProcessWrapperBuilder();
     }
 
     /**
@@ -86,17 +84,14 @@ public class JavaProcessWrapper implements ProcessWrapper {
 
 
         private final List<String> commands = new ArrayList<>();
-        private final String compiledPath;
         private String mainClassName;
 
-        private JavaProcessWrapperBuilder(String compiledPath){
+        private JavaProcessWrapperBuilder(){
             commands.add("java");
-            this.compiledPath = compiledPath;
         }
 
         public JavaProcessWrapper build() throws IOException {
             return new JavaProcessWrapper(new ProcessBuilder()
-                    .directory(new File(compiledPath))
                     .command(commands)
                     .start(), mainClassName);
         }
@@ -156,16 +151,14 @@ public class JavaProcessWrapper implements ProcessWrapper {
      */
     public static class JavacProcessWrapperBuilder {
         private final List<String> commands = new ArrayList<>();
-        private final String sourcePath;
 
-        private JavacProcessWrapperBuilder(String sourcePath){
+        private JavacProcessWrapperBuilder(){
             commands.add("javac");
-            this.sourcePath = sourcePath;
         }
 
-        public JavaProcessWrapper build() throws IOException {
+        public JavaProcessWrapper build(String mainClassPath) throws IOException {
             return new JavaProcessWrapper(new ProcessBuilder()
-                    .directory(new File(sourcePath))
+                    .directory(new File(mainClassPath))
                     .command(commands)
                     .start(), null);
         }
