@@ -39,7 +39,11 @@ public class JavaCompilerExtension implements ParameterResolver {
                 }
                 String[] classesToCompile = compileAnnotation.classesToCompile();
 
-                String[] modulePath = compileAnnotation.modulePath();
+                String[] modulePaths = compileAnnotation.modulePath();
+                for(int i = 0; i < modulePaths.length; i++){
+                    Resource resource = new ClassPathResource(modulePaths[i]);
+                    modulePaths[i] = resource.getFile().getAbsolutePath();
+                }
                 String[] modules = compileAnnotation.modules();
                 JavaProcessWrapper.JavacProcessWrapperBuilder builder = JavaProcessWrapper.builderJavacProcess();
                 builder.withSourcePath(sourceClassPaths);
@@ -47,8 +51,8 @@ public class JavaCompilerExtension implements ParameterResolver {
                 if (classPaths.length != 0) {
                     builder.withClassPath(classPathResources);
                 }
-                if (modulePath.length != 0) {
-                    builder.withModulePath(modulePath);
+                if (modulePaths.length != 0) {
+                    builder.withModulePath(modulePaths);
                 }
                 for (String module : modules) {
                     builder.withModule(module);

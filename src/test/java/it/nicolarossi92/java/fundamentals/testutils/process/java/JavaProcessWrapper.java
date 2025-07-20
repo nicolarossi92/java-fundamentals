@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -142,6 +143,16 @@ public class JavaProcessWrapper implements ProcessWrapper {
         public JavaProcessWrapperBuilder withMainClass(String mainClass){
             commands.add(mainClass);
             this.mainClassName = mainClass;
+            return this;
+        }
+
+        /**
+         * Adds the given command line arguments to the java program
+         * @param args the command line arguments
+         * @return {@link JavaProcessWrapperBuilder}
+         */
+        public JavaProcessWrapperBuilder withCommandLineArguments(String... args){
+            Collections.addAll(commands, args);
             return this;
         }
     }
