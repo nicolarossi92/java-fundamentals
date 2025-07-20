@@ -33,4 +33,20 @@ public class C1S1ClassesVsFilesTest {
         Assertions.assertNotEquals(0, outputCompilation);
     }
 
+    /**
+     * Test to ensure that two non-public classes in the same file will compile successfully,
+     * regardless of the names of the classes. In Java, non-public classes do not need to match
+     * the file name, and multiple non-public classes can be present in a single file.
+     */
+    @Test
+    @DisplayName("Two non public class in the same file will compile regardless of the name of classes")
+    public void twoNonPublicClassesMustCompile(
+            @Compile(
+                    mainClassPath = "c1/classes_vs_files",
+                    classesToCompile = "TwoNonPublicClass.java"
+            ) Integer outputCompilation
+    ){
+        Assertions.assertEquals(0, outputCompilation);
+    }
+
 }
