@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * This class contains tests to validate the rules related to class definitions
  * in Java files, specifically regarding public and non-public classes.
  */
+@DisplayName("C1.S1 – Classes vs Files rules")
 @ExtendWith({TempDirectoryCallback.class, JavaCompilerExtension.class})
 public class C1S1ClassesVsFilesTest {
 
@@ -64,6 +65,21 @@ public class C1S1ClassesVsFilesTest {
         ) Integer outputCompilation
     ){
         Assertions.assertEquals(0, outputCompilation);
+    }
+    /**
+     * Test to ensure that if there is a public class in a file, the name of the
+     * public class must match the file name. If the names do not match, the compilation
+     * should fail, as per Java's naming conventions.
+     */
+    @Test
+    @DisplayName("If there is a public class, its name must match the file name")
+    public void publicClassMustMatchFileName(
+            @Compile(
+                    mainClassPath = "c1/classes_vs_files",
+                    classesToCompile = "PublicClassMustMatchFileName.java"
+            ) Integer outputCompilation
+    ){
+        Assertions.assertNotEquals(0, outputCompilation);
     }
 
 }

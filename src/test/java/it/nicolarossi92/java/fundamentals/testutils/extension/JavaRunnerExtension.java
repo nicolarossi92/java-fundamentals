@@ -51,10 +51,10 @@ public class JavaRunnerExtension implements ParameterResolver {
                 for (String module : modules) {
                     builder.withModule(module);
                 }
+                builder.withMainClass(mainClass);
                 if(commandLineArguments.length != 0){
                     builder.withCommandLineArguments(commandLineArguments);
                 }
-                builder.withMainClass(mainClass);
                 return builder.build().execute();
             }
         } catch (Exception e) {

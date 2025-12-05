@@ -130,7 +130,7 @@ public class JavaProcessWrapper implements ProcessWrapper {
          * @return {@link JavaProcessWrapperBuilder}
          */
         public JavaProcessWrapperBuilder withModule(String module){
-            commands.add("-module");
+            commands.add("--module");
             commands.add(module);
             return this;
         }
@@ -216,7 +216,7 @@ public class JavaProcessWrapper implements ProcessWrapper {
          * @return {@link JavacProcessWrapperBuilder}
          */
         public JavacProcessWrapperBuilder withModule(String module){
-            commands.add("-module");
+            commands.add("--module");
             commands.add(module);
             return this;
         }
