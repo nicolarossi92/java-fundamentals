@@ -11,35 +11,32 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
- * This class contains tests that validates the rules for
- * logical groupings of classes under package and import statements
+ * This class contains tests to validate the use of
+ * jar files inside other programs
  */
-@DisplayName("C1.S5 - Creating Package rules")
+@DisplayName("C1.S6 - Using Jars rules")
 @ExtendWith({JavaCompilerExtension.class, JavaRunnerExtension.class, TempDirectoryCallback.class})
-public class C1S5CreatingPackageTest {
+public class C1S6UsingJarsTest {
 
     /**
-     * This test ensures that grouping classes under packages
-     * and compiling them correctly, provides a logical grouping of classes
-     * which can be accessed by other classes with import statements
+     * This test ensures that a jar can be used in the classpath of compilation
+     * of another class as external library
      */
     @Test
-    @DisplayName("Classes can be grouped under packages with a package statement")
-    public void groupingUnderPackages(
+    @DisplayName("Jars can be used in the classpath as library for other code")
+    public void creatingJarFile(
             @Compile(
-                    classesToCompile = {
-                            "packagea/ClassPackageA.java",
-                            "packageb/ClassPackageB.java"
-                    },
-                    mainClassPath = "c1/creating_packages/grouping_under_packages"
-            ) Integer outputCompilation,
+                    classesToCompile = "CreatingJarFile.java",
+                    mainClassPath = "c1/using_jars/creating_jar_file",
+                    classPath = "c1/using_jars/creating_jar_file/jar_file/Library.jar"
 
+            ) Integer outputCompilation,
             @ExecuteJavaProgram(
-                    mainClass = "packageb.ClassPackageB"
+                    mainClass = "CreatingJarFile",
+                    classPath = "c1/using_jars/creating_jar_file/jar_file/Library.jar"
             ) Integer outputExecution
-    ){
+    ) {
         Assertions.assertEquals(0, outputCompilation);
         Assertions.assertEquals(0, outputExecution);
-
     }
 }
